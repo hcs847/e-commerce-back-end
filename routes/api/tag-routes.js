@@ -7,9 +7,11 @@ router.get("/", (req, res) => {
   // find all tags
   // be sure to include its associated Product data
   Tag.findAll({
-    include: {
-      model: Product,
-    },
+    include: [
+      {
+        model: Product,
+      },
+    ],
   })
     .then((dbTagData) => res.json(dbTagData))
     .catch((err) => {
@@ -21,18 +23,68 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
+  Tag.findOne({
+    where: {
+      id: req.params.id,
+    },
+    include: [
+      {
+        model: Product,
+      },
+    ],
+  })
+    .then((dbTagData) => {
+      if (!dbTagData) {
+        res.status(404).json({ message: "Tag not found" });
+        return;
+      }
+      res.json(dbTagData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(424).json(err);
+    });
 });
 
 router.post("/", (req, res) => {
   // create a new tag
+  Tag.create(req.body)
+    .then((tag) => res.json(tag))
+    .catch((err) => {
+      console.log(err);
+      res.status(422).json(err);
+    });
 });
 
 router.put("/:id", (req, res) => {
   // update a tag's name by its `id` value
+  Tag.update(req.body, {
+    where: { id: req.params.id },
+  }).then((tag) => {
+    if (!tag) {
+      res.status(404).json({ message: "Tag was not found." });
+    }
+    res.json(tag);
+  });
 });
 
 router.delete("/:id", (req, res) => {
   // delete on tag by its `id` value
+  Tag.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((tag) => {
+      if (!tag) {
+        res.status(404).json({ message: "Tag was not found." });
+      }
+      res.json(tag);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(422).json(err);
+    });
 });
 
 module.exports = router;
