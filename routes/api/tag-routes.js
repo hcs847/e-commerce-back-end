@@ -60,12 +60,17 @@ router.put("/:id", (req, res) => {
   // update a tag's name by its `id` value
   Tag.update(req.body, {
     where: { id: req.params.id },
-  }).then((tag) => {
-    if (!tag) {
-      res.status(404).json({ message: "Tag was not found." });
-    }
-    res.json(tag);
-  });
+  })
+    .then((tag) => {
+      if (!tag) {
+        res.status(404).json({ message: "Tag was not found." });
+      }
+      res.json(tag);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(422).json(err);
+    });
 });
 
 router.delete("/:id", (req, res) => {
