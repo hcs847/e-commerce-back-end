@@ -1,1 +1,35 @@
-# e-commerce-back-end
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+# E-commerce Back End
+
+# Description
+
+A backend application to handle Node.js Restful CRUD API using Express and Sequelize to interace with MySQL database.
+
+### Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+
+- [Questions](#questions)
+
+## Installation
+
+In order to utilize the tool, clone the repo and run npm install to download app dependencies. Create an .env file and populate the following
+variables:<br>
+DB_NAME='ecommerce_db'<br>
+DB_USER='root' <br>
+DB_PW= your personal mysql password<br>
+Run mysql -u root -p command followd by your password from the root of the project folder and create the database by running the source db/schema.sql; followed by the exit command.
+Run npm run seed in order to load bulk data into database and then node server.js will start the application.
+Once successful, the console will log 'App lsitening on port' and CRUD requests can be performed through API client testing tools like Insomnia or Get requests through your web browser with the relevant URL address per route (e.g.:http://localhost:3001/api/products).
+
+## Usage
+
+Stepts how to run the application are available in the following demo:<br>
+![](assets/images/demo_e_commerce_api.gif)
+
+## Questions
+
+- Got questions? [email me](mailto:caspi.home@gmail.com)<br>
+- [My GitHub profile](https://github.com/hcs847)
