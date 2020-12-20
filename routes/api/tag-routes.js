@@ -35,14 +35,14 @@ router.get("/:id", (req, res) => {
   })
     .then((dbTagData) => {
       if (!dbTagData) {
-        res.status(404).json({ message: "Tag not found" });
+        res.status(404).json({ message: "Tag was not found" });
         return;
       }
       res.json(dbTagData);
     })
     .catch((err) => {
       console.log(err);
-      res.status(424).json(err);
+      res.status(500).json(err);
     });
 });
 
@@ -52,7 +52,7 @@ router.post("/", (req, res) => {
     .then((tag) => res.json(tag))
     .catch((err) => {
       console.log(err);
-      res.status(422).json(err);
+      res.status(500).json(err);
     });
 });
 
@@ -69,7 +69,7 @@ router.put("/:id", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.status(422).json(err);
+      res.status(500).json(err);
     });
 });
 
@@ -88,7 +88,7 @@ router.delete("/:id", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.status(422).json(err);
+      res.status(500).json(err);
     });
 });
 
